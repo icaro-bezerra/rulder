@@ -142,7 +142,54 @@ npm install && npm run dev
 
 ---
 
-## 📦 Tech stack
+## � Podman / Docker
+
+### `rulder.sh` — one-command launch
+
+The project ships with a shell script that builds the image and opens the browser automatically:
+
+```bash
+./rulder.sh
+```
+
+What it does, step by step:
+
+1. **Verifica dependência** — aborta com mensagem amigável se `podman` não estiver instalado
+2. **Para container anterior** — faz `podman stop` + `podman rm` do container `rulder` se já existir, para evitar conflito de porta
+3. **Build da imagem** — executa `podman build -t rulder .` a partir do `Dockerfile` multi-stage:
+   - **Stage 1** (`node:20-alpine`): instala dependências com `npm ci` e roda `npm run build`
+   - **Stage 2** (`nginx:alpine`): copia apenas o `dist/` gerado — Node.js e `node_modules` são descartados
+   - Imagem final: ~40 MB
+4. **Inicia o container** — `podman run -d --replace -p 8080:8080 rulder`
+5. **Abre o browser** — chama `xdg-open http://localhost:8080` automaticamente
+
+### Porta customizável
+
+```bash
+RULDER_PORT=3000 ./rulder.sh   # sobe na porta 3000
+```
+
+### Comandos manuais
+
+```bash
+# Build
+podman build -t rulder .
+
+# Rodar
+podman run -d --name rulder -p 8080:8080 rulder
+
+# Parar
+podman stop rulder && podman rm rulder
+
+# Ver logs
+podman logs -f rulder
+```
+
+> **Nota Arch Linux:** as imagens usam nomes completamente qualificados (`docker.io/library/node:20-alpine`, `docker.io/library/nginx:alpine`) para compatibilidade com o Podman sem registries padrão configurados em `/etc/containers/registries.conf`.
+
+---
+
+## �📦 Tech stack
 
 | Layer | Technology |
 |-------|------------|
