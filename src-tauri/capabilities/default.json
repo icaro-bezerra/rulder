@@ -4,6 +4,8 @@
   "description": "Default permissions for Rulder — grants core window operations.",
   "windows": ["main"],
   "permissions": [
-    "core:default"
+    "core:default",
+    "core:window:allow-set-fullscreen",
+    "core:window:allow-is-fullscreen"
   ]
 }

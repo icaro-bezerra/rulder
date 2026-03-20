@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import { useReaderStore } from '../store/readerStore';
 import { useSettingsStore } from '../store/settingsStore';
+
+/** Returns true when running inside a Tauri native window. */
+const isTauri = (): boolean => '__TAURI_INTERNALS__' in window;
 
 /**
  * Global keyboard shortcuts for the reader application.
@@ -69,6 +73,16 @@ export function useKeyboardShortcuts(): void {
         case 't':
           if (!e.ctrlKey && !e.metaKey) {
             toggleToc();
+          }
+          break;
+
+        /* ── Fullscreen (Tauri native window only) ───────── */
+        case 'F11':
+          e.preventDefault();
+          if (isTauri()) {
+            getCurrentWindow().isFullscreen().then((full) => {
+              getCurrentWindow().setFullscreen(!full);
+            });
           }
           break;
 

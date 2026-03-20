@@ -33,7 +33,7 @@ cat > "$APPS_DIR/rulder.desktop" <<'DESKTOP'
 [Desktop Entry]
 Name=Rulder
 Comment=A modern, minimalist reader for EPUB and PDF
-Exec=rulder
+Exec=env WEBKIT_DISABLE_DMABUF_RENDERER=1 WEBKIT_DISABLE_COMPOSITING_MODE=1 rulder
 Icon=rulder
 Type=Application
 Categories=Office;Viewer;
