@@ -4,8 +4,8 @@ import { useReaderStore } from '../../store/readerStore';
 import { useSettingsStore } from '../../store/settingsStore';
 import { debounce } from '../../utils/cn';
 
-// Configure pdf.js worker via CDN
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+// Configure pdf.js worker from bundled local file (works offline in Tauri)
+pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 
 type PDFDocProxy = ReturnType<typeof pdfjsLib.getDocument> extends { promise: Promise<infer T> } ? T : never;
 

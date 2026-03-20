@@ -29,3 +29,7 @@ Thumbs.db
 
 # Podman / Docker
 .dockerignore
+
+# Tauri build artifacts (Rust compiled output)
+src-tauri/target/
+src-tauri/gen/

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="bookGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c6cff"/>
+      <stop offset="100%" style="stop-color:#4ecfcf"/>
+    </linearGradient>
+    <linearGradient id="rulerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7c6cff;stop-opacity:0.6"/>
+      <stop offset="50%" style="stop-color:#a78bfa;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#4ecfcf;stop-opacity:0.6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded rect -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg)"/>
+
+  <!-- Book spine (left) -->
+  <rect x="178" y="148" width="56" height="632" rx="16" fill="#3a3a6a"/>
+
+  <!-- Book cover -->
+  <rect x="224" y="148" width="468" height="632" rx="16" fill="url(#bookGrad)" opacity="0.92"/>
+
+  <!-- Page stack (right side) -->
+  <rect x="692" y="160" width="14" height="608" rx="7" fill="#e0e0f0" opacity="0.75"/>
+  <rect x="710" y="172" width="10" height="584" rx="5" fill="#ececf8" opacity="0.55"/>
+  <rect x="724" y="184" width="8" height="560" rx="4" fill="#f5f5ff" opacity="0.35"/>
+
+  <!-- Text lines on book -->
+  <rect x="284" y="284" width="340" height="16" rx="8" fill="white" opacity="0.22"/>
+  <rect x="284" y="324" width="305" height="16" rx="8" fill="white" opacity="0.22"/>
+  <rect x="284" y="364" width="325" height="16" rx="8" fill="white" opacity="0.22"/>
+  <rect x="284" y="404" width="295" height="16" rx="8" fill="white" opacity="0.22"/>
+
+  <!-- Reading ruler highlight (spans full icon width) -->
+  <rect x="120" y="444" width="784" height="52" rx="10" fill="url(#rulerGrad)"/>
+
+  <!-- Ruler left accent bar -->
+  <rect x="126" y="450" width="8" height="40" rx="4" fill="#4ecfcf" opacity="0.95"/>
+
+  <!-- Text lines below ruler -->
+  <rect x="284" y="520" width="315" height="16" rx="8" fill="white" opacity="0.22"/>
+  <rect x="284" y="560" width="340" height="16" rx="8" fill="white" opacity="0.22"/>
+  <rect x="284" y="600" width="290" height="16" rx="8" fill="white" opacity="0.22"/>
+  <rect x="284" y="640" width="320" height="16" rx="8" fill="white" opacity="0.22"/>
+  <rect x="284" y="680" width="305" height="16" rx="8" fill="white" opacity="0.22"/>
+</svg>
