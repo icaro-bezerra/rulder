@@ -12,6 +12,7 @@ import {
   Settings,
   Sun,
   Wheat,
+  Zap,
 } from 'lucide-react';
 import { useReaderStore } from '../../store/readerStore';
 import { useSettingsStore } from '../../store/settingsStore';
@@ -46,6 +47,8 @@ const Toolbar: React.FC<ToolbarProps> = ({ visible }) => {
   const toggleToc = useSettingsStore((s) => s.toggleTocPanel);
   const toggleSearch = useSettingsStore((s) => s.toggleSearchPanel);
   const toggleBookmarks = useSettingsStore((s) => s.toggleBookmarksPanel);
+  const readingMode = useSettingsStore((s) => s.readingMode);
+  const setReadingMode = useSettingsStore((s) => s.setReadingMode);
 
   const cycleTheme = () => {
     const next = theme === 'light' ? 'dark' : theme === 'dark' ? 'sepia' : 'light';
@@ -104,6 +107,14 @@ const Toolbar: React.FC<ToolbarProps> = ({ visible }) => {
 
             <IconButton active={rulerEnabled} onClick={toggleRuler} tooltip="Reading ruler (R)">
               <Ruler size={18} />
+            </IconButton>
+
+            <IconButton
+              active={readingMode === 'word-by-word'}
+              onClick={() => setReadingMode(readingMode === 'word-by-word' ? 'scroll' : 'word-by-word')}
+              tooltip="Word-by-word mode (W)"
+            >
+              <Zap size={18} />
             </IconButton>
 
             <IconButton onClick={cycleTheme} tooltip="Change theme (D)">

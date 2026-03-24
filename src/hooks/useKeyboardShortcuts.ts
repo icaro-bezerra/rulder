@@ -2,13 +2,15 @@ import { useEffect } from 'react';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { useReaderStore } from '../store/readerStore';
 import { useSettingsStore } from '../store/settingsStore';
+import { useWordByWordStore } from '../store/wordByWordStore';
 
 /** Returns true when running inside a Tauri native window. */
 const isTauri = (): boolean => '__TAURI_INTERNALS__' in window;
 
 /**
  * Global keyboard shortcuts for the reader application.
- * Binds key events for navigation, ruler, immersive mode, and panel toggles.
+ * Binds key events for navigation, ruler, immersive mode, panel toggles,
+ * and word-by-word playback controls.
  */
 export function useKeyboardShortcuts(): void {
   const rendition = useReaderStore((s) => s.epubRendition);
@@ -33,6 +35,40 @@ export function useKeyboardShortcuts(): void {
 
       // Skip if user is typing in an input
       if (isInput) return;
+
+      const { readingMode } = useSettingsStore.getState();
+
+      /* ── Word-by-word mode shortcuts ──────────────────── */
+      if (readingMode === 'word-by-word') {
+        const wbw = useWordByWordStore.getState();
+
+        switch (e.key) {
+          case ' ':
+            e.preventDefault();
+            wbw.togglePlayPause();
+            return;
+          case 'ArrowRight':
+            e.preventDefault();
+            wbw.nextWord(e.shiftKey ? 10 : 1);
+            return;
+          case 'ArrowLeft':
+            e.preventDefault();
+            wbw.prevWord(e.shiftKey ? 10 : 1);
+            return;
+          case 'ArrowUp':
+            e.preventDefault();
+            wbw.increaseSpeed();
+            return;
+          case 'ArrowDown':
+            e.preventDefault();
+            wbw.decreaseSpeed();
+            return;
+          case 'Home':
+            e.preventDefault();
+            wbw.restart();
+            return;
+        }
+      }
 
       switch (e.key) {
         /* ── Navigation ──────────────────────────────────── */
@@ -92,6 +128,14 @@ export function useKeyboardShortcuts(): void {
             const { theme, setTheme } = useSettingsStore.getState();
             const next = theme === 'light' ? 'dark' : theme === 'dark' ? 'sepia' : 'light';
             setTheme(next);
+          }
+          break;
+
+        /* ── Word-by-word mode toggle ────────────────────── */
+        case 'w':
+          if (!e.ctrlKey && !e.metaKey) {
+            const { readingMode: currentMode, setReadingMode: setMode } = useSettingsStore.getState();
+            setMode(currentMode === 'word-by-word' ? 'scroll' : 'word-by-word');
           }
           break;
       }

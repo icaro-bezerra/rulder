@@ -2,7 +2,7 @@
 
 export type Theme = 'light' | 'dark' | 'sepia';
 
-export type ReadingMode = 'scroll' | 'paginated';
+export type ReadingMode = 'scroll' | 'paginated' | 'word-by-word';
 
 export type FileType = 'epub' | 'pdf';
 

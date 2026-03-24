@@ -23,6 +23,7 @@ const THEME_OPTIONS: { value: Theme; label: string; icon: React.ReactNode }[] = 
 const MODE_OPTIONS: { value: ReadingMode; label: string }[] = [
   { value: 'scroll', label: 'Scroll' },
   { value: 'paginated', label: 'Paginated' },
+  { value: 'word-by-word', label: 'Word by word' },
 ];
 
 const SettingsPanel: React.FC = () => {
@@ -94,7 +95,7 @@ const SettingsPanel: React.FC = () => {
 
               {/* ── Reading mode ─────────────────────────────── */}
               <Section title="Reading mode">
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-3 gap-2">
                   {MODE_OPTIONS.map((opt) => (
                     <button
                       key={opt.value}

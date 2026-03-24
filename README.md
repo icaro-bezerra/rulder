@@ -11,8 +11,21 @@ A modern, minimalist reader application for **EPUB** and **PDF** files, focused 
 ### Reading
 - Full **EPUB** support via [epub.js](https://github.com/futurepress/epub.js)
 - Full **PDF** support via [pdf.js](https://mozilla.github.io/pdf.js/) with lazy-loaded pages
-- Two reading modes: **vertical scroll** and **horizontal pagination**
+- Three reading modes: **vertical scroll**, **horizontal pagination**, and **word-by-word**
 - Smooth page-turn animations (paginated mode)
+
+### 🔤 Word-by-word mode (RSVP speed reading)
+- Displays text **one word at a time**, centered on screen for focused reading
+- Automatic playback with **play / pause / restart** controls
+- Configurable speed from **50 to 1000 WPM** (words per minute)
+- **Punctuation-aware timing** — slight pauses on commas, longer pauses on sentence endings
+- **Progress slider** for scrubbing through the full text
+- **ORP focal letter highlighting** — accents the optimal recognition point for speed reading
+- Chunk mode — display 1–5 words at a time
+- Adjustable display font size (20–96 px) and bold toggle
+- Position is **saved and restored** per book across sessions
+- Works with both EPUB and PDF files
+- Quick toggle via toolbar ⚡ button or `W` keyboard shortcut
 
 ### 📏 Reading ruler (signature feature)
 - Spotlight-style ruler that highlights the current reading line
@@ -57,6 +70,12 @@ A modern, minimalist reader application for **EPUB** and **PDF** files, focused 
 | `←` / `→` | Previous / next page (paginated) |
 | `Alt+↑` / `Alt+↓` | Nudge ruler position |
 | `Esc` | Close open panels |
+| `W` | Toggle word-by-word mode |
+| `Space` | Play / pause (word-by-word) |
+| `←` / `→` | Previous / next word (word-by-word) |
+| `Shift+←` / `Shift+→` | Skip 10 words (word-by-word) |
+| `↑` / `↓` | Increase / decrease speed (word-by-word) |
+| `Home` | Restart from beginning (word-by-word) |
 
 ### 🧠 Performance
 - Lazy page loading for large PDFs via IntersectionObserver
@@ -76,13 +95,13 @@ A modern, minimalist reader application for **EPUB** and **PDF** files, focused 
 ```
 src/
 ├── types/            # TypeScript type definitions & constants
-├── store/            # Zustand state stores (reader, settings)
+├── store/            # Zustand state stores (reader, settings, wordByWord)
 ├── hooks/            # Custom React hooks (keyboard, auto-hide)
 ├── lib/              # Storage utilities (localStorage)
-├── utils/            # Helper functions (cn, debounce, clamp)
+├── utils/            # Helper functions (cn, debounce, clamp, textExtractor)
 └── components/
     ├── ui/           # Reusable UI primitives (GlassPanel, Toggle, Slider)
-    ├── reader/       # Core renderers (EPUB, PDF, ReadingRuler, ReaderView)
+    ├── reader/       # Core renderers (EPUB, PDF, ReadingRuler, WordByWord, ReaderView)
     ├── controls/     # Toolbar, ProgressBar, Settings, TOC, Search, Bookmarks
     ├── HomeScreen    # Landing page with drag-and-drop
     └── AppShell      # Layout orchestrator with auto-hiding controls
